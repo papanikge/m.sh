@@ -5,7 +5,7 @@
 if [[ $1 == "-h" ]]; then
     echo "  m <drive letter>[<partition number>]"
     echo "  Example: m b1 (for /dev/sdb1)"
-    return
+    kill $$
 fi
 
 # parsing arguments
@@ -32,23 +32,50 @@ fi
 ls /dev/sd$DRIVE &>/dev/null
 if [[ $? -eq 2 ]]; then
     echo "Drive doesn't exist. Aborting."
-    return
+    kill $$
 fi
 
 # is it mounted?
 df | grep "sd$DRIVE" &>/dev/null
 if [[ $? -eq 1 ]]; then
     # Not mounted
-    # TODO: Options for destinations
+    # default destination:
     DESTINATION="/mnt/St"
+
+    # using mountpoint to find one
+    ls -1 /mnt > ~/.mtemp
+    cat ~/.mtemp | while read -r line
+    do
+        mountpoint -q /mnt/$line
+        if [[ $? -eq 1 ]]; then
+            # saving to a file so we can get it after the loop.
+            # see 'disappearing variables' (Bash is weird)
+            echo "mnt/${line}" > ~/.mtemp
+            break
+        fi
+    done
+    DESTINATION=$(cat ~/.mtemp)
+
+    rm ~/.mtemp
     sudo mount /dev/sd$DRIVE $DESTINATION
-    echo "### Mounted /dev/sd$DRIVE on $DESTINATION"
+    if [[ $? -eq 0 ]]; then
+        echo "### Mounted /dev/sd$DRIVE on $DESTINATION"
+    fi
 else
     # Already mounted
     WHERE=$(df | grep "sd$DRIVE" | awk '{ print $NF }')
     sudo umount $WHERE
-    echo "### Unmounted /dev/sd$DRIVE"
+    if [[ $? -eq 0 ]]; then
+        echo "### Unmounted /dev/sd$DRIVE"
+    fi
 fi
 
 # Save the drive name for later
 echo $DRIVE > ~/.m
+
+# do we need to unset?
+unset DRIVE
+unset DESTINATION
+unset line
+unset WHERE
+unset ARG
