@@ -1,5 +1,5 @@
 #!/bin/bash
-# A script for handling drive mounting
+# A script for easy drive mounting
 
 # in case of requesting help
 if [[ $1 == "-h" ]]; then
@@ -50,7 +50,7 @@ if [[ $? -eq 1 ]]; then
         if [[ $? -eq 1 ]]; then
             # saving to a file so we can get it after the loop.
             # see 'disappearing variables' (Bash is weird)
-            echo "mnt/${line}" > ~/.mtemp
+            echo "/mnt/${line}" > ~/.mtemp
             break
         fi
     done
@@ -72,10 +72,3 @@ fi
 
 # Save the drive name for later
 echo $DRIVE > ~/.m
-
-# do we need to unset?
-unset DRIVE
-unset DESTINATION
-unset line
-unset WHERE
-unset ARG
