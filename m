@@ -1,5 +1,7 @@
 #!/bin/bash
 # A script for easy drive mounting
+# Author: George Papanikolaou papanikge(at)ceid.upatras.gr
+# using a file in user's home to remember last used drive
 
 # in case of requesting help
 if [[ $1 == "-h" ]]; then

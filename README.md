@@ -1,6 +1,6 @@
 #m.sh
 
-This is a shell script to automate the (un)mounting proccess of drives,  
+This is a shell script to automate the (un)mounting process of drives,  
 that replaced the usual alias in my .bashrc.
 
 ##Install
@@ -12,7 +12,9 @@ Just download, make it executable and add it to your $PATH (or run in from anywh
 ##Usage
 
 with
+
     m c2
+
 you can mount the /dev/sdc2 drive somewhere.  
 default drive is the b1 one. (the script will create a dir if there isn't one)  
 
