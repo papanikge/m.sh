@@ -5,15 +5,17 @@ that replaced the usual alias in my .bashrc.
 
 ##Install
 
-Just download, make it executable and add it to your path (or run in from anywhere)
+Just download, make it executable and add it to your $PATH (or run in from anywhere)
 
-    wget http://raw.github.com/g3orge/m.sh/master/m -O m && chmod +x m && sudo mv m /usr/bin
+    wget -q http://raw.github.com/g3orge/m.sh/master/m -O m && chmod +x m && sudo mv m /usr/bin
 
 ##Usage
 
 Just type m and c2 for example to mount the /dev/sdc2 drive somewhere.  
-default drive is the b1 one.  
+default drive is the b1 one. (the script will create a dir if there isn't one)  
 Type m again to unmount it.
+
+(needs administrator privileges) 
 
 ##License
 

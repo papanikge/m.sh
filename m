@@ -39,10 +39,7 @@ fi
 df | grep "sd$DRIVE" &>/dev/null
 if [[ $? -eq 1 ]]; then
     # Not mounted
-    # default destination:
-    DESTINATION="/mnt/St"
-
-    # using mountpoint to find one
+    # using mountpoint to find one a place to mount
     ls -1 /mnt > ~/.mtemp
     cat ~/.mtemp | while read -r line
     do
@@ -55,8 +52,14 @@ if [[ $? -eq 1 ]]; then
         fi
     done
     DESTINATION=$(cat ~/.mtemp)
-
     rm ~/.mtemp
+
+    # if we don't have a destination yet
+    if [[ -z $DESTINATION ]]; then
+        sudo mkdir /mnt/m$DRIVE
+        DESTINATION=/mnt/m$DRIVE
+    fi
+
     sudo mount /dev/sd$DRIVE $DESTINATION
     if [[ $? -eq 0 ]]; then
         echo "### Mounted /dev/sd$DRIVE on $DESTINATION"
