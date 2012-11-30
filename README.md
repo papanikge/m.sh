@@ -7,13 +7,16 @@ that replaced the usual alias in my .bashrc.
 
 Just download, make it executable and add it to your $PATH (or run in from anywhere)
 
-    wget -q http://raw.github.com/g3orge/m.sh/master/m -O m && chmod +x m && sudo mv m /usr/bin
+    wget -q http://raw.github.com/g3orge/m.sh/master/m -O m && chmod +x m && sudo mv m /usr/bin/
 
 ##Usage
 
-Just type m and c2 for example to mount the /dev/sdc2 drive somewhere.  
+with
+    m c2
+you can mount the /dev/sdc2 drive somewhere.  
 default drive is the b1 one. (the script will create a dir if there isn't one)  
-Type m again to unmount it.
+
+Type m again to unmount it (it will remember the last drive used)
 
 (needs administrator privileges) 
 
