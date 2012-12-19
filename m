@@ -12,7 +12,7 @@ fi
 
 # parsing arguments
 if [[ $# -eq 0 ]]; then
-    if [[ -x ~/.m ]]; then
+    if [[ -e ~/.m ]]; then
         DRIVE=$(head -1 ~/.m)
     else
         # default is second drive: /dev/sdb1
