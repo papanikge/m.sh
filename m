@@ -33,7 +33,8 @@ fi
 # does the drive exist?
 ls /dev/sd$DRIVE &>/dev/null
 if [[ $? -eq 2 ]]; then
-    echo "Drive doesn't exist. Aborting."
+    echo "Drive doesn't exist"
+    ls /dev/sd*
     kill $$
 fi
 
