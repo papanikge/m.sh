@@ -65,14 +65,14 @@ if [[ $? -eq 1 ]]; then
 
     sudo mount /dev/sd$DRIVE $DESTINATION
     if [[ $? -eq 0 ]]; then
-        echo "### Mounted /dev/sd$DRIVE on $DESTINATION"
+        echo "==> Mounted /dev/sd$DRIVE on $DESTINATION"
     fi
 else
     # Already mounted
     WHERE=$(df | grep "sd$DRIVE" | awk '{ print $NF }')
     sudo umount $WHERE
     if [[ $? -eq 0 ]]; then
-        echo "### Unmounted /dev/sd$DRIVE"
+        echo "==> Unmounted /dev/sd$DRIVE"
     fi
 fi
 
