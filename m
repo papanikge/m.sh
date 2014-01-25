@@ -71,9 +71,7 @@ else
     # Already mounted
     WHERE=$(df | grep "sd$DRIVE" | awk '{ print $NF }')
     sudo umount $WHERE
-    if [[ $? -eq 0 ]]; then
-        echo "==> Unmounted /dev/sd$DRIVE"
-    fi
+    [[ $? -eq 0 ]] && echo "==> Unmounted /dev/sd$DRIVE"
 fi
 
 # Save the drive name for later
