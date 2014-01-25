@@ -1,29 +1,25 @@
 #m.sh
 
-This is a lightweight shell script to automate the (un)mounting process of drives in your system  
-It replaced the usual function in my .bashrc.
+Simple script to unmount all removable drives currently mounted on /mnt and /media  
+
+Although, if you give it the drive's callsigns (i.e.: b1 for /dev/sdb1) it will mount it.  
+
+The name comes from 'mount' of course because prior to the current version this
+tool's purpose was to automate the (un)mounting process of drives in a system.
+But then I discovered and started using udev rules and you have no reason to do
+so as well. (You can also use something like udiskie)
 
 ##Install
 
 Just download, make it executable and add it to your $PATH (or run in from anywhere)
 
-    wget -q http://raw.github.com/g3orge/m.sh/master/m -O m
+    wget -q http://raw.github.com/papanikge/m.sh/master/m -O m
     chmod +x m
-    mv m /usr/bin/
+    mv m /usr/bin/ # optional in order to put it into your path
 
 ##Usage
 
-with
-
-    m c2
-
-you can mount the /dev/sdc2 drive somewhere.  
-Default drive is the b1 one.   
-The script will create a dir if there isn't one    
-
-Type m again to unmount it (it will remember the last drive used)
-
-ATTENTION: it will run sudo internaly to mount the drive  
+I don't believe you're that lazy for this script...
 
 ##License
 

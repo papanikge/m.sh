@@ -1,7 +1,9 @@
 #!/bin/bash
-# A script for easy drive mounting
-# Author: George Papanikolaou papanikge(at)ceid.upatras.gr
-# using a file in user's home to remember last used drive
+#
+# A script for easy drive un-mounting
+# Author: George Papanikolaou papanikge(at)ceid.upatras.gr 2012-2014
+# Version 2.0
+#
 
 # in case of requesting help
 if [[ $1 == "-h" ]]; then
@@ -12,12 +14,13 @@ fi
 
 # parsing arguments
 if [[ $# -eq 0 ]]; then
-    if [[ -e ~/.m ]]; then
-        DRIVE=$(head -1 ~/.m)
-    else
-        # default is second drive: /dev/sdb1
-        DRIVE="b1"
-    fi
+    for directory in /mnt/* ; do
+        mountpoint -q $directory
+        if [[ $? -eq 0 ]]; then
+            sudo umount $directory
+        fi
+    done
+    kill $$
 else
     ARG=$1
     # using the length of the first argument to check
@@ -73,6 +76,3 @@ else
     sudo umount $WHERE
     [[ $? -eq 0 ]] && echo "==> Unmounted /dev/sd$DRIVE"
 fi
-
-# Save the drive name for later
-echo $DRIVE > ~/.m
